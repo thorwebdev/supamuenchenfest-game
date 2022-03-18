@@ -12,11 +12,38 @@ export default async function handler(req, res) {
 
     const { q } = req.query;
 
+    if (q?.toLowerCase().includes("primes")) {
+      const isPrime = (num) => {
+        for (let i = 2, s = Math.sqrt(num); i <= s; i++)
+          if (num % i === 0) return false;
+        return num > 1;
+      };
+      // 0069bcb0: which of the following numbers are primes: 421, 572
+      console.log(q);
+      const parts = q
+        .split(": ")[2]
+        .split(", ")
+        .map((n) => Number(n))
+        .filter((n) => isPrime(n));
+      const result = parts[0];
+      console.log(result);
+      return res.status(200).end(result.toString());
+    }
+
     if (q?.toLowerCase().includes("plus")) {
       // what is 11 plus 17
       console.log(q);
       const parts = q.split(" ");
       const result = Number(parts[3]) + Number(parts[5]);
+      console.log(result);
+      return res.status(200).end(result.toString());
+    }
+
+    if (q?.toLowerCase().includes("minus")) {
+      // what is 11 plus 17
+      console.log(q);
+      const parts = q.split(" ");
+      const result = Number(parts[3]) - Number(parts[5]);
       console.log(result);
       return res.status(200).end(result.toString());
     }
