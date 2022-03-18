@@ -1,5 +1,6 @@
 import * as uuid from "uuid";
 import rateLimit from "../../utils/rate-limit";
+import facts from "../../utils/facts";
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
@@ -68,6 +69,12 @@ export default async function handler(req, res) {
       console.log("Method:", req.method);
       console.log("Body:", req.body);
       return res.status(200).end("Kopfsteinhammer");
+    }
+
+    // Unknown request - check the facts
+    if (!q?.toLowerCase().includes("what is your name")) {
+      console.log(q);
+      return res.status(200).end(facts(req));
     }
 
     res.status(200).end("Kopfsteinhammer");
