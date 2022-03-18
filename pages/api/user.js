@@ -21,10 +21,22 @@ export default async function handler(req, res) {
       return res.status(200).end(result.toString());
     }
 
+    if (q?.toLowerCase().includes("multiplied")) {
+      // what is 11 plus 17
+      console.log(q);
+      const parts = q.split(" ");
+      const result = Number(parts[3]) * Number(parts[6]);
+      console.log(result);
+      return res.status(200).end(result.toString());
+    }
+
     if (q?.toLowerCase().includes("largest")) {
       // what is 11 plus 17
       console.log(q);
-      const parts = q.split(": ")[1].split(", ");
+      const parts = q
+        .split(": ")[2]
+        .split(", ")
+        .map((n) => Number(n));
       const result = Math.max(...parts);
       console.log(result);
       return res.status(200).end(result.toString());
@@ -34,7 +46,7 @@ export default async function handler(req, res) {
     if (q?.toLowerCase().includes("both a square and a cube")) {
       console.log(q);
       const parts = q
-        .split(": ")[1]
+        .split(": ")[2]
         .split(", ")
         .map((x) => Number(x))
         // is a square
@@ -47,8 +59,7 @@ export default async function handler(req, res) {
           const cube = Math.cbrt(x);
           return cube % 1 === 0;
         });
-      const result = Math.max(...parts);
-      console.log(result);
+      const result = parts[0];
       return res.status(200).end(result.toString());
     }
 
