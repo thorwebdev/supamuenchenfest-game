@@ -1,6 +1,6 @@
 import * as uuid from "uuid";
 import rateLimit from "../../utils/rate-limit";
-import facts from "../../utils/facts";
+import { facts } from "../../utils/queryParser";
 
 const limiter = rateLimit({
   interval: 60 * 1000, // 60 seconds
@@ -91,20 +91,15 @@ export default async function handler(req, res) {
       return res.status(200).end(result?.toString());
     }
 
-    if (!q?.toLowerCase().includes("what is your name")) {
-      console.log("q:", req.query.q);
-      console.log("Method:", req.method);
-      console.log("Body:", req.body);
-      return res.status(200).end("Kopfsteinhammer");
-    }
+    // if (!q?.toLowerCase().includes("what is your name")) {
+    //   console.log("q:", req.query.q);
+    //   console.log("Method:", req.method);
+    //   console.log("Body:", req.body);
+    //   return res.status(200).end("Kopfsteinhammer");
+    // }
 
-    // Unknown request - check the facts
-    if (!q?.toLowerCase().includes("what is your name")) {
-      console.log(q);
-      return res.status(200).end(facts(req));
-    }
-
-    res.status(200).end("Kopfsteinhammer");
+    // Unknow -> fact check
+    return res.status(200).end(facts(req));
   } catch (e) {
     console.log(e);
     res.status(429).json({ error: "Rate limit exceeded" });
