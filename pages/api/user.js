@@ -30,6 +30,28 @@ export default async function handler(req, res) {
       return res.status(200).end(result.toString());
     }
 
+    // which of the following numbers is both a square and a cube: 961, 845, 4, 499
+    if (q?.toLowerCase().includes("both a square and a cube")) {
+      console.log(q);
+      const parts = q
+        .split(": ")[1]
+        .split(", ")
+        .map((x) => Number(x))
+        // is a square
+        .filter((x) => {
+          const sqrt = Math.sqrt(x);
+          return sqrt % 1 === 0;
+        })
+        // is a cube
+        .filter((x) => {
+          const cube = Math.cbrt(x);
+          return cube % 1 === 0;
+        });
+      const result = Math.max(...parts);
+      console.log(result);
+      return res.status(200).end(result.toString());
+    }
+
     if (!q?.toLowerCase().includes("what is your name")) {
       console.log("q:", req.query.q);
       console.log("Method:", req.method);
