@@ -49,6 +49,15 @@ export default async function handler(req, res) {
       return res.status(200).end(result.toString());
     }
 
+    if (q?.toLowerCase().includes("power")) {
+      // q: what is 7 to the power of 18
+      console.log(q);
+      const parts = q.split(" ");
+      const result = Math.pow(Number(parts[3]), Number(parts[8]));
+      console.log(result);
+      return res.status(200).end(result.toString());
+    }
+
     if (q?.toLowerCase().includes("multiplied")) {
       // what is 11 plus 17
       console.log(q);
