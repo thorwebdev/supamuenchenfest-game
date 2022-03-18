@@ -60,7 +60,7 @@ export default async function handler(req, res) {
           return cube % 1 === 0;
         });
       const result = parts[0];
-      return res.status(200).end(result.toString());
+      return res.status(200).end(result?.toString());
     }
 
     if (!q?.toLowerCase().includes("what is your name")) {
