@@ -16,6 +16,8 @@ export const facts = (req) => {
       return "2016";
     case "who played James Bond in the film Dr No".toLowerCase():
       return "Sean Connery";
+    case "what is your name".toLowerCase():
+      return "Kopfsteinhammer";
     default:
       console.log("Unknown fact", q);
       return "";
