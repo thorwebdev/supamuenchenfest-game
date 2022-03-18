@@ -10,6 +10,12 @@ export const facts = (req) => {
       return "munich";
     case "roses are red violets are blue":
       return "sugar is sweet, and so are you.";
+    case "which city is the Eiffel tower in".toLowerCase():
+      return "paris";
+    case "which year was Theresa May first elected as the Prime Minister of Great Britain".toLowerCase():
+      return "2016";
+    case "who played James Bond in the film Dr No".toLowerCase():
+      return "Sean Connery";
     default:
       console.log("Unknown fact", q);
       return "";
